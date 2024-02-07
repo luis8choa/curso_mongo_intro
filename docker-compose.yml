@@ -1,0 +1,26 @@
+version: '3.9'
+#Version docker compose
+
+services:
+  mongodb:
+  #Normalmente cuando se trabaja con bases de datos,
+  #ponemos el nombre de la base de datos
+    image: mongo:5.0
+    #Version de mongo con la que trabajaremos
+    #Podemos buscar info sobre esta imagen en docker hub
+    #Automaticamente si no ponemos tag. se toma la ultima version del hub
+    ports:
+      - "27017:27017"
+      #Este debe ser el puerto de mongodb.
+      #Puesto que es el puerto por el que mongo normalmente
+      #recibe su comunicacion. DEBE ser el 27017
+    environment:
+    #variables de ambientes
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root123
+    volumes:
+      - ./mongo_data:/data/db
+      #guardo persistencia desde mongo_data hacia
+      #una carpeta en el contenedor con ruta data/db
+      #Esta ruta es como generalmente mongodb llama al volumen
+
