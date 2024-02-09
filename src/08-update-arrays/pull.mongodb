@@ -1,0 +1,41 @@
+use("platzi_store")
+
+//Como eliminar elementos
+//El siguiente sera un update masivo
+// db.inventory.updateMany({},
+//     {
+//         $pull: {
+//             tags: "book"
+//         }
+//     })
+// De todos los elementos, quitaremos el valor book dentro 
+//los arrays equivalentes a al parametro tags$
+
+//En caso de requerirse eliminar mas de un elementos de los arrays
+
+// db.inventory.updateMany({},
+//     {
+//         $pull: {
+//             tags: "book"
+//         },
+//         $pull: {
+//             tags: "appliance"
+//         }
+//     })
+
+
+//Otra forma, se podria usar el operador. $in
+
+db.inventory.updateMany({},
+    {
+        $pull: {
+            tags: {
+                $in: ["book","appliance", "school"]
+
+            }
+        }
+    })
+//en este caso indicamos que los datos a borrar en tags,
+//seran un array creado con el operador $in, en donde
+//indicaremos los errores a borrar
+

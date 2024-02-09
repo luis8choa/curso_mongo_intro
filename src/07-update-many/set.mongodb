@@ -1,0 +1,53 @@
+use("sample_training")
+
+//db.zips.find({city: "CLEVELAND"}).count()
+
+// $set
+
+// db.zips.updateMany(
+//     //query
+//     {city: "CLEVELAND"},
+//     //operators
+//     {
+//         $set: {
+//             myAttr: 'Hola'
+//         }
+//         //Recordemos que el set
+//         //nos permite crear atributos
+//         // y asignarles un valor
+//         //incluso si no existe previamente
+//         //este atributo
+//     }
+// )
+
+// $rename
+
+// db.zips.updateMany(
+//     //query
+//     {city: "CLEVELAND"},
+//     //operators
+//     {
+//         $rename: {
+//             myAttr: 'my_data'
+//         }    
+//     }
+// )
+
+// $unset
+
+db.zips.updateMany(
+    //query
+    {city: "CLEVELAND"},
+    //operators
+    {
+        $unset: {
+            my_data: ''
+        }
+        // para el caso de unset
+        // solo debemos indicar que parametro
+        // requerimos eliminar y indicaremos
+        // que su valor es vacio, puesto que
+        // el operador no lo tomara en cuenta
+    }
+)
+
