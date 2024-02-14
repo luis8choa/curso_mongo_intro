@@ -1,0 +1,48 @@
+use("platzi_store")
+
+//insertaremos la informacion de lectura de este sensor
+
+//por fecha solo debe haber un documento ligado a este sensor
+
+//al ser la primer lectura se creo un nuevo documento
+
+// db.iot.insertOne({
+//     sensor: "A001",
+//     date: "2022-01-03",
+//     readings: [1212]
+// })
+
+//que pasa cuando llega una segunda lectura en el dia.
+//en este caso tendriamos que actualizar la informacion
+
+// db.iot.updateOne({
+//     sensor: 'A001',
+//     date: "2022-01-03"},
+//     {
+//         $pop:{
+//             readings: 1 //borrar primer elemento
+//         }   
+//     })
+
+db.iot.updateOne({
+    sensor: 'A001',
+    date: "2022-01-03"},
+    {
+        $push:{
+            readings: 2323 //recordar al hacer push
+            //enviar valor en vez de un array
+        }   
+    })
+
+//Si tenemos el primer valor del dia debemos usar insert one
+//pero si ya hay debemos usar update. 
+
+//Como validar si hay elementos para hacer update o insert dependiendo la situacion
+
+db.iot.find({
+    sensor: 'A001',
+    date: "2022-01-03"}).count()
+    //conteo de registros que cumplan con la condicion
+
+    
+

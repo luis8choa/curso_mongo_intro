@@ -1,0 +1,23 @@
+use("platzi_store")
+
+//usaremos este como base por que se basa mas en
+//actualizar que en insertar
+
+db.iot.updateOne({ //correremos todo con este metodo
+    sensor: 'A001',
+    date: "2022-01-04"},
+    {
+        $push:{
+            //readings: 2323 //recordar al hacer push
+            //modifiquemos los datos
+            readings: 3245
+            //enviar valor en vez de un array
+        }
+    },{
+        upsert: true //indacamos que se lleve a cabo un upsert...
+        //si cabe  
+    })
+
+    //automaticamente sabra que si no existe, lo va a crear
+
+    
