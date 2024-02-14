@@ -1,0 +1,16 @@
+use("platzi_store")
+
+//cada producto tiene un id
+
+//db.products.deleteOne({_id: 1})
+
+//db.products.deleteOne({_id: ObjectId("numero_random")})
+//En caso de estar trabajando con id autogenerados
+//por mongo deberiamos usar la funcion ObjectId para indicar
+//correctamente el _id del archivo.
+
+//db.products.deleteMany({price: 100})
+
+//Otra forma de hacer eliminacion
+db.products.drop() 
+//elimina TODOS los objetos de la coleccion
