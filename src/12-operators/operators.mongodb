@@ -1,0 +1,50 @@
+use("platzi_store")
+
+// Using $gt (>) or $gte (>=)
+
+// db.inventory.find({ qty: {$gt : 20} })
+//encuentra registros con qty mayor a 20
+
+// db.inventory.find({ qty: {$gte : 20} })
+//encuentra registros con qty mayor o igual a 20
+
+
+// Using $lt (>) or $lte (>=)
+
+// db.inventory.find({ qty: {$le : 20} })
+//encuentra registros con qty menor a 20
+
+
+// db.inventory.find({ qty: {$lte : 20} })
+//encuentra registros con qty menor o igual a 20
+
+//We can use ranges, Join operators
+ 
+//db.inventory.find({qty : {$gt: 15, $lt: 30 }}
+
+
+//Join mas especificos
+
+// db.inventory.find({
+//     "item.name": "ab",
+//     qty : 
+//         {$gte: 15, $lte: 30 }
+//     }
+// )
+
+//Join mas especificos
+
+// db.inventory.find({
+//     "item.code": "123",
+//     qty : 
+//         {$gte: 15, $lte: 30 }
+//     }
+// )
+
+db.inventory.find({
+    "item.code":{$ne: "123"},
+    qty : 
+        {$gte: 15, $lte: 30 }
+    }
+)
+

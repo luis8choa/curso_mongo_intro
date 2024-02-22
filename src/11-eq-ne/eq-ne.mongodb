@@ -1,0 +1,32 @@
+use("platzi_store")
+
+// Using $eq
+// db.inventory.find({ qty:20})
+// esto se considera un operador $eq,
+// este operador esta de manera implicita en las consultas
+
+// Otra manera de hacerlo
+// db.inventory.find({ qty: {$eq : 20}})
+// usamos explicitamente este operador
+
+// Tambien se puede usar para poder buscar un documento
+// con un subdocumento adentro
+
+// db.inventory.find({"item.name": "ab"})
+// Al realizar consultas de valores de subobjetos debemos
+// usar comillas dobles para el indicador tipo objeto.subobjeto
+
+// db.inventory.find({"item.code": "123"})
+// Al realizar consultas de valores de subobjetos debemos
+// usar comillas dobles para el indicador tipo objeto.subobjeto
+
+// tambien podemos hacdrlo de forma explicita tal que:
+
+// db.inventory.find({"item.code": { $eq: "123"}})
+
+// para usar $ne debemos hacerlo de forma explicita
+
+ db.inventory.find({ qty: {$ne: 20}})
+
+// Ambos operadors son de query, lo que quiere decir que podemos
+// utilizarlos para el update
