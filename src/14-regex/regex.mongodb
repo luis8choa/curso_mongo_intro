@@ -1,0 +1,45 @@
+use("platzi_store")
+
+// // db.iventory.find()
+
+// //Como vemos estos documentos
+// //tiene un subdocumento description
+
+// //para buscar una descripcion,
+// //deberiamos escribir todo el valor
+// //de la cadena de texto para poder hacer match
+
+// db.inventory.find({"item.description": {$regex: /line/} })
+// //podemos buscar por patron o palabras en el texto
+
+// //operador $regex, significa expresiones regulares.
+// // para insertar la expesion usamos  esta estcutura:
+// //      /expresion_regular/
+
+// //esta expresion busca todo lo que tenga "line" adentro
+
+// db.inventory.find({"item.description": {$regex: /LINE/} })
+// //no encontrara nada
+
+// //pero...
+// db.inventory.find({"item.description": {$regex: /LINE/i} })
+// //podemos indicar con un i luego del slash que no queremos que sea
+// //sensitive case, esta vez si encontrara
+
+
+// //busqueda de texto que termine en line
+// db.inventory.find({"item.description": {$regex: /line$/} })
+// // $ indica que termine en este patron, puesto al final claro
+
+// db.inventory.find({"item.description": {$regex: /^single/i} })
+// //  ^ al principio indica que la palabra empieza con el string
+// //definido
+
+
+//como trabajar con saltos de linea /n,
+//por ejemplo queremos buscar documentos que inicien alguna de sus lineas
+//de tal manera
+db.inventory.find({"item.description": {$regex: /^s/im} })
+
+//luego de /expresion_regular/ podemos una m (multilines)
+//indica que estamos trabajando con un parrafo o texto con saltos de linea
