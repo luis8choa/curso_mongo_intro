@@ -1,0 +1,116 @@
+use("platzi_store")
+
+// $in 
+//se usa para obtener dentro de un array,
+//esos elementos que busco.
+
+//$in sirve para objetos, valores especificos y arrays
+
+// db.inventory.find({
+//     //qty: {$in: [20,25]}
+//     //en este caso el operador funciona
+//     //como un or, pues se busca un
+//     // o mas conjunto de valores 
+//     //de qty. trae qty de 20 y 25
+
+//     //tags: {$in: ["school",""]}
+//     //queremos buscar tags que dentro
+//     //de su array tengan cierto elemento
+
+//     //tags: {$in: ["electronics","book"]}
+//     //queremos buscar tags que dentro
+//     //de su array tengan cierto elementos
+//     //ya sea uno a otro
+
+//     //$nin
+//     //qty: {$nin: [20,25]}
+//     //contrario, trae documentos
+//     //que no tengan ninguno de estos
+//     //valores en su array
+
+
+//     //tags: {$nin: ["electronics","book"]}
+// })
+
+//operadores que solo funcion para array
+
+// db.inventory.find({
+//     tags:'book'
+//     //Elementos que contengan 
+//     //book en sus arrays de tags
+
+//     //tags: {$nin: ["electronics","book"]}
+// })
+
+// db.inventory.find({
+//     //tags: ["school",'book']
+//     //si buscamos este array, solo
+//     //nos trae el array que cumple 
+//     //exactamente con nuestra consulta
+//     //si hay mas elementos, se descarta
+//     //si hay menos tambien.
+//     //si no estan en la misma pocision,
+//     //se descarta.
+
+//     //por ejemplo
+//     tags: ['book',"school"]
+//     //no trae nada
+// })
+
+
+//arrays 
+//$all -> solo funciona para atributos o
+//campos que tienen arrays
+// db.inventory.find({
+//     tags: { $all: ['book',"school"]}
+//     // $all se de envia un array
+//     //Se hara una busqueda de los elementos
+//     //que en su array tengan ambos elementos
+//     //si tienen mas tambien se trae
+//     //debe tener al menps ambos,
+//     //no importa el orden
+
+//     //buscamos valores
+
+// })
+
+//$size -> busca tamaño de array, numero de elementos
+
+// db.inventory.find({
+//     tags: { $size: 2}
+//     // $size busca numero de elementos
+//     // en este caso busca que el valor tag tenga un
+//     //un array de dos elementos
+
+// })
+
+//cambiamos a la otra base de datos
+
+//requerimiento: queremos buscar por todas las encuestas que
+//dentro del array, que es array de documentos, se tengan
+//productos "xyz"
+
+//$elemMatch -> se usa para arrays que contienen objetos dentro,
+//en este caso nuevos subcampos
+// db.survey.find({
+//     results: { $elemMatch: {product: "xyz"}}
+//     // results es el campo que contiene los arrays,
+//     //luego query con el operador $elemMatch
+//     //y luego otra query respecto a ese campo dentro del array
+//     //trae todos los documentos que dentro del results
+//     //tenga un producto xyz
+// })
+ 
+//combianmos operadores poder absoluto
+
+db.survey.find({
+    results: {
+        $elemMatch: {
+            product: "xyz",
+            score:{
+                $gte: 7
+            }
+        }   
+    }
+})
+
