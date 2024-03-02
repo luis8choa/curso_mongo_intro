@@ -1,0 +1,81 @@
+use("sample_training")
+
+//db.inspections.find()
+
+// //AND de forma implicita
+// db.inspections.find({
+//     sector: "Tax Preparers - 891",
+//     result: "Unable to Locate"
+// }).count() //conteo de valores que cumplen
+// //con estas dos condiciones especificas (AND)
+
+
+
+// //Podemos usar AND de forma explicita
+// // $and: [{},{},{}]
+// db.inspections.find({
+//     //utilizamos operador AND, 
+//     $and: [
+//         {sector: "Tax Preparers - 891"},
+//         {result: "Unable to Locate"}
+//     ] 
+//     //a este operador necesariamente 
+//     //se le pasa un array.
+//     //cada elemento del array sera una query
+// }).count()
+
+
+
+// //Podemos usar OR de forma explicita
+// // $or: [{},{},{}]
+// db.inspections.find({
+//     //utilizamos operador OR, 
+//     $or: [
+//         {sector: "Tax Preparers - 891"},
+//         {result: "Unable to Locate"}
+//     ] 
+//     //a este operador necesariamente 
+//     //se le pasa un array.
+//     //cada elemento del array sera una query
+// }).count()
+
+
+// //Podemos usar NOR de forma explicita
+// // $nor: [{},{},{}]
+// db.inspections.find({
+//     //utilizamos operador NOR, 
+//     $nor: [
+//         {sector: "Tax Preparers - 891"},
+//         {result: "Unable to Locate"}
+//     ] 
+//     //a este operador necesariamente 
+//     //se le pasa un array.
+//     //cada elemento del array sera una query
+// }).count() 
+// //Se regresan documentos que no cumplan con ninguna condicion
+
+
+// db.inspections.find({ 
+//     $nor: [
+//         {result: "No Violation Issued1"},
+//         {result: "Unable to Locate"}
+//     ] 
+// }, {
+//     result: 1, //proyecion de result
+//     _id: 0, // no proyeccion de id
+// }
+// )
+// //dejamos afuera todo el conjunto de datos
+
+//not -> negacion, este operador no recibe un 
+// array sino que recibe una consulta o query 
+// $not = {}
+
+db.inspections.find({
+    result: {$not: {$regex: /Unable to Locate/ }}
+})
+//estamos buscando documentos
+// que en el atributo result
+//no tengan valores equvalentes 
+//con la expresion regular
+
