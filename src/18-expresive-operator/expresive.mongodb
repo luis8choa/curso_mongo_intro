@@ -1,0 +1,32 @@
+use("platzi_store")
+
+//db.monthlyBudget.find({spent: {$gte: 100}})
+
+// //expresive operator
+// db.monthlyBudget.find({
+//     $expr: { //operator de forma expressiva
+//         $gte: ["$spent",100]
+//         //le pasamos un array con 
+//         // el valor que queremos proeguntar
+//         // y el valor con el que queremos comparar
+//         //el signo $ es un operador para seleccionar un campo en especifico
+//     }
+// })
+
+// Cabe preguntarmos, si ambas consultas hacen los mismo,
+//  por que complicarnos? El potencial de $expr es mayor.
+
+// Es por que aparte de compararlo con un valor directo se
+//  puede hacer con un valor directo de la coleccion
+
+//expresive operator
+db.monthlyBudget.find({
+    $expr: { //operator de forma expressiva
+
+        //evalua los documentos en los spent supero o igualo el budget
+        $gte: ["$spent","$budget"]
+        //se compara con cada atributo budget del mismo
+        //documento.
+
+    }
+})

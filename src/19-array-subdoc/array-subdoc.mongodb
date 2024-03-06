@@ -1,0 +1,66 @@
+use("sample_training")
+
+//db.trips.findOne()
+//en vacio solo trae primer elemento de la coleccion
+
+//db.trips.findOne({"start station location.type": "Point"})
+//consulta de atributos dentro de subdocumento de coleccion
+
+//db.companies.find()
+
+//en reltionships tendremos a 
+//como primer subdocumento sera el CEO
+
+// db.companies.find({
+//     "relationships.0.person.last_name": "Zuckerberg"
+//     //esta sintaxis se usa partiendo
+//     //del hecho de que
+//     //la primera posicion
+//     //tiene el subdocumento
+//     //de informacion para el CEO
+
+//     //indicamos subobjeto al que iremos
+
+//     //indicamos atributo de ese subobjeto
+// },
+// //proyeccion
+// {
+//     name: 1,
+//     relationships: 1
+// })
+
+// db.companies.find({
+//     "relationships.0.person.first_name": "Mark"
+// },
+// //proyeccion
+// {
+//     name: 1,
+//     relationships: 1
+// }).count()
+
+//En este caso solo pudimos llevar a cabo la
+//consulta sabiendo de antemano que la posicion
+// 0 sera el CEO
+
+
+
+
+//En caso de querer requerir a todas las personas en la compañia
+//con cargo alto, en vez de solo el CEO
+
+//de cualquier elemento en relationships.
+
+//para este caso utilizamos $elemMatch
+
+db.companies.find({
+    relationships: {
+        $elemMatch: {
+            "person.first_name": "Mark" 
+            //buscamos una persona relacionada, en cualquier posicion
+        }
+    },
+}, 
+{
+    name: 1,
+    person: 1
+}).count()

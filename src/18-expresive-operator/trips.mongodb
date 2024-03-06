@@ -1,0 +1,25 @@
+use("sample_training")
+
+db.trips.find()
+
+// db.trips.find({
+//     $expr: {
+//         $and: [ //recordemos and es array con condicionales
+//             {$eq: ["$start station id", "$end station id"]},
+//             {tripduration: {$gte: 1200}}
+//         ] 
+//         //mismo destino que punto de partida
+//     } 
+// }).count()
+
+//esta consulta fallara por que no esta escrita de forma expresiva
+
+db.trips.find({
+    $expr: {
+        $and: [ //recordemos and es array con condicionales
+            {$eq: ["$start station id", "$end station id"]},
+            {$gte:["$tripduration", 1200]}
+        ] 
+        //mismo destino que punto de partida
+    } 
+}).count()
