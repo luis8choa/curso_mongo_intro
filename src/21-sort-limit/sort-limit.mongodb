@@ -1,0 +1,16 @@
+use("sample_training")
+
+//db.zips.find()
+//no hay orden aparente(van por orden de id)
+
+// //organizar - sort
+// db.zips.find({pop:{$gte: 100}})
+// 
+// .sort({pop:1})
+// //pop:-1
+
+//limit
+db.zips.find({pop:{$gte: 100}})
+.sort({pop:1})
+.limit(2) //dos documentos mayores, que cumplan que son mayores a 100
+

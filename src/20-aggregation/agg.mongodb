@@ -1,0 +1,61 @@
+use("sample_airbnb")
+
+// db.listingsAndReviews.find()
+
+// db.listingsAndReviews.find({
+//     amenities: "Wifi"
+// },
+// {
+//     price: 1,
+//     amenities: 1
+// })
+
+// db.listingsAndReviews.find({
+//     amenities: {$ne:"Wifi"}
+// },
+// {
+//         price: 1,
+//         amenities: 1
+// }    
+// )
+
+//aggregation framework
+
+//en vez de .find usamos .aggregate
+// funciona con pipeline:  [],[],[]
+//cada pipeline sera un proceso que alimenta al interior
+db.listingsAndReviews.aggregate([
+    {$match: { //match
+      amenities: "Wifi" //haciendo find
+    }}, 
+    {$project: { //proyeccion en este caso se utiliza con un operador
+      price: 1, amenities: 1 //aqui estamos proyectando
+    }}
+])
+
+// db.listingsAndReviews.aggregate([
+//     //si lo enviaramos asi
+//     //seria como un find sobre todos los documentos
+
+//     {$project: { //proyeccion en este caso se utiliza con un operador
+//       price: 1, amenities: 1 //aqui estamos proyectando
+//     }}
+// ])
+
+
+//Ahora con agrupaciones:
+
+db.listingsAndReviews.aggregate([
+    {$match: { //match
+      amenities: "Wifi" //haciendo find
+    }}, 
+    {$project: { //proyeccion en este caso se utiliza con un operador
+      address: 1 //aqui estamos proyectando
+    }},
+    {$group: {
+      _id: "$address.country", //agrupar deacuerdo a su direccion pais
+      count: { //nombre de el atributo 
+        $sum: 1 //el atributo sera el resultado de un operador de suma unitaria
+      }
+    }} 
+])

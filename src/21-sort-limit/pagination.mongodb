@@ -1,0 +1,48 @@
+use("platzi_store")
+
+//recordemos orden va por id
+
+// //primera pagina
+// db.categories
+//     .find()
+//     .skip(0)
+//     .limit(2)
+
+//segunda pagina
+db.categories
+    .find()
+    .skip(2)
+    .limit(2)
+
+
+// db.categories
+//     .find()
+//     .skip(4)
+//     .limit(2)
+
+
+//otro ejemplo para traer diferentes paginas,
+//el limite queda constante pero el skip
+//va creciendo de manera linear
+
+// db.categories
+//     .find()
+//     .skip(0)
+//     .limit(3)
+
+// db.categories
+//     .find()
+//     .skip(3)
+//     .limit(3)
+
+db.categories
+    .find()
+    .skip(6)
+    .limit(3)
+
+// aqui solo trae el ultimo por que solo quedaba 
+//un elemento en esta pagina
+db.categories
+    .find()
+    .skip(6)
+    .limit(3)
